@@ -21,10 +21,8 @@ public class MainPageTest {
         if (driver == null) {
             throw new IllegalStateException("WebDriver is not initialized. Ensure the Hooks class is properly setting up the WebDriver.");
         }
-
         // Initialize the MainPage object using the driver
         mainPage = new MainPage(driver);
-
         // Navigate to main page
         driver.get("https://openweathermap.org/");
     }
