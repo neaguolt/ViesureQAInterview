@@ -11,7 +11,7 @@ import java.util.Properties;
 
 public class Hooks {
     private static final Logger logger = LoggerFactory.getLogger(Hooks.class);
-    private BrowserDriver browserDriver;
+    private final DriverFactory browserDriver = new DriverFactory();
     private WebDriver driver;
 
     @Before
@@ -24,22 +24,12 @@ public class Hooks {
         // Initialize the browser (default to Chrome if not specified)
         String browser = config.getProperty("browser", "chrome");
         logger.info("Starting test with browser: {}", browser);
-        browserDriver = new BrowserDriver(browser);
-        driver = browserDriver.getDriver();
+        driver = browserDriver.initDriver(browser);
         logger.info("Browser {} has been initialized successfully.", browser);  // Confirm browser started
     }
 
     @After
     public void tearDown() {
-        if (driver != null) {
-            logger.info("Test finished, quitting the browser.");
-            browserDriver.quit();
-            logger.info("Browser has been closed.");
-        }
-    }
-
-    public WebDriver getDriver() {
-        // Return the WebDriver instance
-        return this.driver;
+        browserDriver.quitDriver();
     }
 }

@@ -164,17 +164,20 @@ Verify the main page's search field contains correct placeholder text
        When User looks at the main page's search field
        Then User should see correct placeholder text
        
-  * is my approch corect? please gest focous only on the cucumber file for the moment  
+  * is my approach correct? please just focus only on the cucumber file for the moment  
 
   *Yes, your approach is almost correct, but I will help fine-tune your Cucumber feature file to align more closely with Cucumber’s best practices.
 
 Let's break down what your file does and how it can be improved:
 
 ### Key Concepts:
-Feature: This is the high-level description of what you are testing. It should summarize what the feature (in this case, verifying the placeholder text)
-is doing.
-Scenario: This defines a specific test case that describes a particular situation or flow in your application.
-Given, When, Then: These keywords are part of Cucumber's "Gherkin" syntax, 
+Feature:  
+    This is the high-level description of what you are testing.  
+    It should summarize what the feature (in this case, verifying the placeholder text) is doing.  
+Scenario:   
+    This defines a specific test case that describes a particular situation or flow in your application.  
+Given, When, Then:    
+    These keywords are part of Cucumber's "Gherkin" syntax, 
 which you use to define steps in your scenario. Each keyword has a specific role:
 
 * Given: Describes the starting point (the initial context).
@@ -193,13 +196,16 @@ Scenario: The search field contains the correct placeholder text
   Then the user should see the placeholder text "Search..."  
 
 ### Explanation of Improvements:
-* Feature Description:
-I changed the feature description to something more concise: "Verify the placeholder text in the main page's search field." This keeps it clear and 
-focused on what you're testing.
+* Feature Description:  
+I changed the feature description to something more concise:  
+  "Verify the placeholder text in the main page's search field."  
+This keeps it clear and focused on what you're testing.
 
 * Scenario Name:
-The scenario name was slightly reworded to make it more specific. Instead of just saying "Verify the main page's search field contains correct 
-placeholder text," I made it reflect what exactly is happening in the scenario: "The search field contains the correct placeholder text."
+The scenario name was slightly reworded to make it more specific.  
+Instead of just saying "Verify the main page's search field contains correct placeholder text,"  
+I made it reflect what exactly is happening in the scenario:   
+"The search field contains the correct placeholder text."
 
 * Step Definitions:
  Given: I rephrased "User open site main page" to "the user is on the main page." This is a common convention and sounds more natural.
@@ -209,3 +215,4 @@ placeholder text," I made it reflect what exactly is happening in the scenario: 
 * Summary:
 Your overall structure is correct, but small changes in clarity and specificity make a big difference in writing good Cucumber tests. 
 * The revised version is more readable and aligns better with Gherkin syntax best practices.
+
