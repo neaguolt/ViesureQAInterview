@@ -12,14 +12,12 @@ import java.util.List;
 
 public class MainPage {
     private final WebDriver driver;
-    private final WebDriverWait wait;
     private final By searchFieldNav = By.xpath("//*[@id=\"desktop-menu\"]/form/input[1]");
     private final By searchFieldWidget = By.xpath("//*[@id=\"weather-widget\"]/div[2]/div/div/div[2]/div[1]/div/input");
     private final By dropdownOptions = By.xpath("//ul[@class='search-dropdown-menu']/li");
 
     public MainPage(WebDriver driver) {
         this.driver = driver;
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }/*
     public WebElement getSearchFieldNav() {
         return driver.findElement(searchFieldNav);
@@ -31,7 +29,8 @@ public class MainPage {
         return driver.findElement(searchFieldWidget);
     }*/
     public String searchAndSelectOptionByText(String searchText, String optionText) {
-        // Step 1: Find the search field and enter the text (e.g., "Sydney")
+        final WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
         WebElement searchField = driver.findElement(searchFieldWidget);
         searchField.sendKeys(searchText);
 

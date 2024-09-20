@@ -4,6 +4,8 @@ import io.cucumber.java.en.Given;
 import pages.MainPage;
 
 public class CommonSteps {
+    final MainPage mainPage;
+
     @Given("the user is on the main page")
     public void the_user_is_on_the_main_page() {
         if (driver == null) {
