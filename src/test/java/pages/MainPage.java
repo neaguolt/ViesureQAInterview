@@ -28,26 +28,28 @@ public class MainPage {
     public WebElement getSearchFieldWidget() {
         return driver.findElement(searchFieldWidget);
     }*/
-    public String searchAndSelectOptionByText(String searchText, String optionText) {
+    public List<WebElement> searchDropdownByText(String searchText) {
         final WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-
         WebElement searchField = driver.findElement(searchFieldWidget);
+
         searchField.sendKeys(searchText);
-
-        // Step 2: Wait for the dropdown to populate with options
+        // Wait for the dropdown to populate with options
         wait.until(ExpectedConditions.visibilityOfElementLocated(dropdownOptions));
+        // Get all the dropdown options
+        return driver.findElements(dropdownOptions);
+    }
+    public void searchSelectOptionByText(String searchText, String optionText) {
+        List<WebElement> optionList =  searchDropdownByText(searchText);
 
-        // Step 3: Get all the dropdown options
-        List<WebElement> options = driver.findElements(dropdownOptions);
-
-        // Step 4: Iterate over the options and find the one that matches the desired text
-        for (WebElement option : options) {
-            if (option.getText().equalsIgnoreCase(optionText)) {
-                // Click on the matching option
-                option.click();
-
-                // Return the complete text of the selected option
-                return option.getText();
+        // Iterate over the options and find the one that matches the desired text
+        for (WebElement option : optionList) {
+            List<WebElement> spanList = option.findElements(By.tagName("span"));
+            for (WebElement span : spanList) {
+                if (span.getText().equalsIgnoreCase(optionText)) {
+                    // Click on the matching option
+                    option.click();
+                    return;
+                }
             }
         }
         // If no matching option is found, return a message or handle it accordingly
