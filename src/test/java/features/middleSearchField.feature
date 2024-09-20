@@ -1,7 +1,7 @@
-Feature: Verify the functinality of the main page middle search field
+Feature: Verify the functionality of the main page middle search field
 
-  Scenario: Serach for city and verify the selected city, date and time
-    Given the user is on main page
+  Scenario: Search for city and verify the selected city, date and time
+    Given the user is on the main page
     When the user type "Sydney" in the search field
     And the user clicks on search buton
     And the user selects "Sydney, AU"

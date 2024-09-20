@@ -18,6 +18,7 @@ public class MainPage {
     private final WebDriver driver;
     private final By searchFieldNav = By.xpath("//*[@id=\"desktop-menu\"]/form/input[1]");
     private final By searchFieldWidget = By.xpath("//*[@id=\"weather-widget\"]/div[2]/div/div/div[2]/div[1]/div/input");
+    private final By searchBtn = By.xpath("//*[@id=\"weather-widget\"]/div[2]/div/div/div[2]/div[1]/button");
     private final By dropdownOptions = By.xpath("//ul[@class='search-dropdown-menu']/li");
     private static final Logger logger = LoggerFactory.getLogger(MainPage.class);
 
@@ -29,10 +30,13 @@ public class MainPage {
     }*/
     public String getSearchFieldNavPlaceholder() {
         return driver.findElement(searchFieldNav).getAttribute("placeholder");
-    }/*
+    }
     public WebElement getSearchFieldWidget() {
         return driver.findElement(searchFieldWidget);
-    }*/
+    }
+    public WebElement getSearchBtn() {
+        return driver.findElement(searchBtn);
+    }
     public List<WebElement> searchDropdownByText(String searchText) {
         final WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         WebElement searchField = driver.findElement(searchFieldWidget);

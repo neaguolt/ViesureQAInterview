@@ -7,7 +7,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 
 public class DriverFactory {
-    private final WebDriver driver;
+    private  WebDriver driver;
 
     public WebDriver initDriver(String browser) {
         if (browser.equalsIgnoreCase("firefox")) {

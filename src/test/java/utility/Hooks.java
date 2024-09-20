@@ -32,4 +32,8 @@ public class Hooks {
     public void tearDown() {
         browserDriver.quitDriver();
     }
+
+    public WebDriver getDriver() {
+        return driver;
+    }
 }
