@@ -14,10 +14,8 @@ public class CommonSteps {
 
     @Given("the user is on the main page")
     public void the_user_is_on_the_main_page() {
-        if (driver == null) {
-            throw new IllegalStateException("WebDriver is not initialized. Ensure the Hooks class is properly setting up the WebDriver.");
-        }
-        // Navigate to main page
-        driver.get("https://openweathermap.org/");
+        MainPage mainPage = new MainPage(driver);
+
+        mainPage.openURL();
     }
 }

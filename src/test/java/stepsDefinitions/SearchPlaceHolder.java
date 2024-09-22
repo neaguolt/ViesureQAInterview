@@ -22,6 +22,7 @@ public class SearchPlaceHolder {
     @Then("the user should see the placeholder text {string}")
     public void the_user_should_see_the_placeholder_text(String string) {
         MainPage mainPage = new MainPage(driver);
+
         String text = mainPage.getSearchFieldNavPlaceholder();
         Assert.assertEquals(string, text );
     }

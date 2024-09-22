@@ -20,6 +20,7 @@ public class MainPage {
     private final By searchFieldWidget = By.xpath("//*[@id=\"weather-widget\"]/div[2]/div/div/div[2]/div[1]/div/input");
     private final By searchBtn = By.xpath("//*[@id=\"weather-widget\"]/div[2]/div/div/div[2]/div[1]/button");
     private final By dropdownOptions = By.xpath("//ul[@class='search-dropdown-menu']/li");
+    private final By WidgetTitle = By.xpath("//*[@id=\"weather-widget\"]/div[3]/div[1]/div[1]/div[1]/h2");
     private static final Logger logger = LoggerFactory.getLogger(MainPage.class);
 
     public MainPage(WebDriver driver) {
@@ -28,27 +29,34 @@ public class MainPage {
     public WebElement getSearchFieldNav() {
         return driver.findElement(searchFieldNav);
     }*/
+    public void openURL(){
+        if (driver == null) {
+            throw new IllegalStateException("WebDriver is not initialized. Ensure the Hooks class is properly setting up the WebDriver.");
+        }
+        // Navigate to main page
+        driver.get("https://openweathermap.org/");
+    }
     public String getSearchFieldNavPlaceholder() {
         return driver.findElement(searchFieldNav).getAttribute("placeholder");
     }
-    public WebElement getSearchFieldWidget() {
-        return driver.findElement(searchFieldWidget);
-    }
-    public WebElement getSearchBtn() {
-        return driver.findElement(searchBtn);
-    }
-    public List<WebElement> searchDropdownByText(String searchText) {
-        final WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        WebElement searchField = driver.findElement(searchFieldWidget);
+    public void typeTextFieldWidget(String text) {
 
-        searchField.sendKeys(searchText);
+        driver.findElement(searchFieldWidget).sendKeys(text);
+    }
+    public void clickSearchBtn() {
+
+        driver.findElement(searchBtn).click();
+    }
+    public List<WebElement> getDropdownList() {
+        final WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
         // Wait for the dropdown to populate with options
         wait.until(ExpectedConditions.visibilityOfElementLocated(dropdownOptions));
         // Get all the dropdown options
         return driver.findElements(dropdownOptions);
     }
-    public void searchSelectOptionByText(String searchText, String optionText) {
-        List<WebElement> optionList =  searchDropdownByText(searchText);
+    public void searchSelectOptionByText(String optionText) {
+        List<WebElement> optionList =  getDropdownList();
 
         // Iterate over the options and find the one that matches the desired text
         Optional<WebElement> elementToClick = optionList.stream()
@@ -60,12 +68,16 @@ public class MainPage {
         elementToClick.ifPresentOrElse(
                 element -> {
                     element.click();
-                    logger.info("Clicked on the option with text: {}", searchText);
+                    logger.info("Clicked on the option with text: {}", optionText);
                 },
                 () -> {
                     // If no matching element is found, print a message
                     throw new NoSuchElementException("No dropdown option found with text: " + optionText);
                 }
         );
+    }
+    public String getWidgetTitle() {
+
+        return driver.findElement(WidgetTitle).getText();
     }
 }
