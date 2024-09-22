@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,6 +22,8 @@ public class MainPage {
     private final By searchBtn = By.xpath("//*[@id=\"weather-widget\"]/div[2]/div/div/div[2]/div[1]/button");
     private final By dropdownOptions = By.xpath("//ul[@class='search-dropdown-menu']/li");
     private final By WidgetTitle = By.xpath("//*[@id=\"weather-widget\"]/div[3]/div[1]/div[1]/div[1]/h2");
+    private final By WidgetDate = By.xpath("//*[@id=\"weather-widget\"]/div[3]/div[1]/div[1]/div[1]/span");
+    private LocalDateTime selectionDateTime;
     private static final Logger logger = LoggerFactory.getLogger(MainPage.class);
 
     public MainPage(WebDriver driver) {
@@ -65,19 +68,27 @@ public class MainPage {
                         .map(span->option))
                         .findFirst();
 
-        elementToClick.ifPresentOrElse(
-                element -> {
-                    element.click();
-                    logger.info("Clicked on the option with text: {}", optionText);
-                },
-                () -> {
-                    // If no matching element is found, print a message
-                    throw new NoSuchElementException("No dropdown option found with text: " + optionText);
-                }
-        );
+        if (elementToClick.isPresent()) {
+            WebElement element = elementToClick.get();
+            element.click();
+            logger.info("Clicked on the option with text: {}", optionText);
+            selectionDateTime = LocalDateTime.now();  // Return the current date and time when the click occurs
+        } else {
+            // If no matching element is found, throw an exception
+            throw new NoSuchElementException("No dropdown option found with text: " + optionText);
+        }
     }
     public String getWidgetTitle() {
 
         return driver.findElement(WidgetTitle).getText();
+    }
+
+    public String getWidgetDate() {
+        return driver.findElement(WidgetDate).getText();
+    }
+
+    public LocalDateTime getSelectionDateTime() {
+
+        return selectionDateTime;
     }
 }
