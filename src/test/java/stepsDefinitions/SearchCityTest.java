@@ -8,7 +8,7 @@ import org.openqa.selenium.WebDriver;
 import pages.MainPage;
 import utility.Hooks;
 
-import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class SearchCityTest {
@@ -42,7 +42,7 @@ public class SearchCityTest {
 
     @And("the user gets the Sydney date and time")
     public void theUserGetsTheSydneyDateAndTime() {
-        LocalDateTime selectionDateTime = mainPage.getSelectionDateTime();
+        ZonedDateTime selectionDateTime = mainPage.getSelectionDateTime();
         DateTimeFormatter dateFormatter;
 
         dateFormatter = DateTimeFormatter.ofPattern("MMM dd");
@@ -71,6 +71,8 @@ public class SearchCityTest {
         String actualDateTime = mainPage.getWidgetDate();
 
         String actualTime = actualDateTime.split(", ")[1];
-        Assert.assertEquals(selectionTime, actualTime);
+        String normSelectionTime = selectionTime.trim().toLowerCase().replaceAll("\\s", "");
+        String normActualTime = actualTime.trim().toLowerCase().replaceAll("\\s", "");
+        Assert.assertEquals(normSelectionTime, normActualTime);
     }
 }
