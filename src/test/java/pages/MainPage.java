@@ -54,8 +54,10 @@ public class MainPage {
         driver.findElement(searchFieldWidget).sendKeys(text);
     }
     public void clickSearchBtn() {
+        final WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebElement button = wait.until(ExpectedConditions.elementToBeClickable(searchBtn));
 
-        driver.findElement(searchBtn).click();
+        button.click();
     }
     public List<WebElement> getDropdownList() {
         final WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
