@@ -36,7 +36,6 @@ public class MainPage {
 
         acceptButton.click();
         wait.until(ExpectedConditions.invisibilityOfElementLocated(By.className("gdpr-banner")));
-        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.className("owm-loader")));
     }
     public void openURL() {
         if (driver == null) {
@@ -55,6 +54,8 @@ public class MainPage {
     }
     public void clickSearchBtn() {
         final WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.className("owm-loader")));
+
         WebElement button = wait.until(ExpectedConditions.elementToBeClickable(searchBtn));
 
         button.click();
