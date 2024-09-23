@@ -29,15 +29,14 @@ public class SearchCityTest {
     }
 
     @And("the user clicks on search button")
-    public void theUserClicksOnSearchButton() throws InterruptedException {
-        Thread.sleep(10000);
+    public void theUserClicksOnSearchButton() {
 
         mainPage.clickSearchBtn();
     }
 
     @And("the user selects {string}")
-    public void theUserSelects(String city) {
-        mainPage.searchSelectOptionByText(city);
+    public void theUserSelects(String selectOption) {
+        mainPage.selectOptionByText(selectOption);
     }
 
     @And("the user gets the Sydney date and time")
@@ -47,7 +46,7 @@ public class SearchCityTest {
 
         dateFormatter = DateTimeFormatter.ofPattern("MMM dd");
         selectionDate = selectionDateTime.format(dateFormatter);
-        dateFormatter = DateTimeFormatter.ofPattern("HH:mm a");
+        dateFormatter = DateTimeFormatter.ofPattern("hh:mma");
         selectionTime = selectionDateTime.format(dateFormatter);
     }
 

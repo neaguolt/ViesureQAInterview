@@ -13,7 +13,7 @@ public class CommonSteps {
     }
 
     @Given("the user is on the main page")
-    public void the_user_is_on_the_main_page() {
+    public void the_user_is_on_the_main_page() throws InterruptedException {
         MainPage mainPage = new MainPage(driver);
 
         mainPage.openURL();
